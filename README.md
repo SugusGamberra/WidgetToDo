@@ -1,9 +1,10 @@
 # Widget To-Do List
 
-**Version**: 1.0.0 **Fecha**: 25/11/2025 **Autora**: SugusGamberra
+**Version**: 1.0.1 **Fecha**: 25/11/2025 **Autora**: SugusGamberra
 ---
 <p align="center">
 Un widget de escritorio sencillo para gestionar tareas de mi curso ;3
+Este widget está conectado a Notion!
 </p>
 <p align="center">
   <img src="https://img.shields.io/github/license/SugusGamberra/WidgetToDo" />
@@ -40,10 +41,10 @@ Un widget de escritorio sencillo para gestionar tareas de mi curso ;3
 
 - ✅ Añadir, completar y eliminar tareas
 - 📚 Categorizar por asignaturas
-- 💾 Almacenamiento local (JSON) por el momento, en el futuro irá con Notion
+- 💾 Almacenamiento CONECTADO A NOTION!!! // local (JSON) opcional
 - 🎨 Interfaz moderna y minimalista
 
-## Contribuciones
+## ✨ Contribuciones
 
 Las contribuciones son bienvenidas! Sigue estos pasos:
 
@@ -53,11 +54,11 @@ Las contribuciones son bienvenidas! Sigue estos pasos:
 4. 📤 Pushea a la branch (git push origin feature/AmazingFeature)
 5. 🔃 Abre una Pull Request
 
-## Licencia
+## 🗒️ Licencia
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE.md) file for details.
 
-### License Summary
+### 📋 License Summary
 - ✅ Commercial use
 - ✅ Modification
 - ✅ Distribution
@@ -65,16 +66,41 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE.md)
 - ❌ Liability
 - ❌ Warranty
 
-## Support
+## 📎 Support
 
 - 📧 **Email**: sugusgamberra@gmail.com
 - 🐛 **Issues**: [GitHub Issues](https://github.com/SugusGamberra/WidgetToDo/issues)
 
-## Acknowledgments
+## 🩵 Acknowledgments
 
 - 🎨 **Inspiración del diseño**: Me he inspirado en el estilo glass morphism, me ha pegado duro con eso xd
 
 ---
+
+## 🐙 SETUP
+
+Si quieres usar este widget conectado a tu Notion tienes que seguir una serie de pasos, son un _aburrimiento_ pero muy necesarios para hacer que funcione!
+
+1. Conseguir el **TOKEN** 🗝️
+   1. Asumiendo que tienes cuenta en notion, entra aquí: [Integraciones de Notion](https://www.notion.so/profile/integrations)
+   2. Dale a `+ New Integration`
+   3. Ponle un nombre descriptivo
+   4. Dale a **submit**
+   5. Dale para ver tu token y copia esa clave secreta!
+   6. Copiala y pegala en el .env que te tienes que crear en tu proyecto, a la altura del package.json y tal, y de nombre tiene que llamarse `NOTION_TOKEN`=tutokenaqui
+2. Preparar tu **tablita en Notion** 📅
+   1. Crea una nueva página completa (full page) en notion
+   2. Asegurate que tenga **EXACTISIMAMENTE** estas columnas (importante el nombre y el tipo):
+      1. **Titulo**: Tipo `title`/Titulo. Es la _columna principal_!
+      2. **Done?**: Tipo `checkbox`/Casilla. Ten en cuenta el signo de interrogación 😘
+   3. Arriba a la derecha de tu página, dale a los 3 puntitos - `Connections (Conexiones)` y busca el nombre de la integracion que creaste en el paso 1
+3. Consigue el ID de la BBDD🆔
+   1. Abre tu pagina como pagina completa (veras un simbolito royo ventanita, tu pasale el raton x encima hasta que lo veas)
+   2. Mira la URL, date cuenta que entre la barra `/` y el `?` hay chorrocientos números, pos esos los tienes que copiar, pa que lo veas mejor:
+      https://www.notion.so/user/`NUMEROTOLARGO12345`?
+   3. Copia solo esos numeritos y pegalos en tu .env, se debe llamar `NOTION_DATABASE_ID`=tusnumeritosaqui
+
+Y **listooo**!!! Ahora puedes arrancarlo en vsc para comprobar que funcione (npm start) ;3 Mas adelante haré el .exe, así que estas instrucciones son temporales :3 
 
 > Espero qe te guste y te inspire a hacer tu propio todo list!
 > Seguiré manteniendo actualizado esto hasta que tenga una version competi jiji

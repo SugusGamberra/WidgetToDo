@@ -7,3 +7,7 @@ release/
 build/
 .DS_Store
 Thumbs.db
+
+#herramientas d desarrollo (solo pa mi y pruebas)
+detective.js
+src/detective.js
