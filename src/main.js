@@ -1,8 +1,11 @@
+require('dotenv').config();
 const { app, BrowserWindow, ipcMain, screen } = require('electron');
 const path = require('path');
-const fs = require('fs'); // Necesario para el log de errores
+const fs = require('fs');
 const Store = require('electron-store');
-const { getTasks, toggleTask, addTask, deleteTask } = require('./services/localTaskService');
+// ARCARAJO SE PUDO!!! quito el q lo guarde local, yuosss que gustazo!!! y todo por el require T_T lloro d felicidad cuyonsss
+// const { getTasks, toggleTask, addTask, deleteTask } = require('./services/localTaskService');
+const { getTasks, toggleTask, addTask, deleteTask } = require('./services/notionService');
 
 app.disableHardwareAcceleration();
 const logPath = path.join(app.getPath('userData'), 'log.txt');
@@ -74,6 +77,7 @@ ipcMain.handle('get-tasks', async () => { return getTasks(); });
 ipcMain.handle('toggle-task', async (event, taskId) => { return toggleTask(taskId); });
 ipcMain.handle('add-task', async (event, title, subject) => { return addTask(title, subject); });
 ipcMain.handle('delete-task', async (event, taskId) => { return deleteTask(taskId); });
+ipcMain.handle('get-subjects', async () => { return getSubjectsList(); });
 
 app.whenReady().then(() => {
     createWindow();

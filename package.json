@@ -1,6 +1,6 @@
 {
   "name": "widget-todo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Widget para mantener mis tareas de clases siempre a mano en el escritorio!",
   "main": "src/main.js",
   "scripts": {
@@ -27,7 +27,6 @@
     "electron-builder": "^26.0.12"
   },
   "dependencies": {
-    "@notionhq/client": "^5.4.0",
     "dotenv": "^17.2.3",
     "electron-store": "^6.0.1",
     "pug": "^3.0.3"
