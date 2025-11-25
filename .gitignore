@@ -1,0 +1,9 @@
+.env
+node_modules/
+dist/
+src/renderer/index.html
+*.log
+release/
+build/
+.DS_Store
+Thumbs.db

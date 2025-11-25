@@ -1,0 +1,22 @@
+extends components/layout
+
+block content 
+    .widget-container 
+        .glass-overlay
+        .glass-specular
+        
+        .glass-content
+            header 
+                h1 Mis Tareas
+                button#close-btn ✕
+
+            main 
+                .add-task-form
+                    input#new-task-title(type="text" placeholder="Nueva tarea...")
+                    input#new-task-subject(type="text" placeholder="Asignatura...")
+                    button#add-task-btn Añadir
+
+                .task-list#task-list 
+                    p.loading Cargando tareas...
+    
+    script(src="js/app.js")

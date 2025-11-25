@@ -1,0 +1,35 @@
+{
+  "name": "widget-todo",
+  "version": "1.0.0",
+  "description": "Widget para mantener mis tareas de clases siempre a mano en el escritorio!",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.SugusGamberra.widgettodo",
+    "productName": "Widget Tareas",
+    "win": {
+      "target": "nsis"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ]
+  },
+  "keywords": [],
+  "author": "SugusGamberra",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^39.2.3",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "@notionhq/client": "^5.4.0",
+    "dotenv": "^17.2.3",
+    "electron-store": "^6.0.1",
+    "pug": "^3.0.3"
+  }
+}
