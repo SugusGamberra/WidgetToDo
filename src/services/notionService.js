@@ -1,5 +1,20 @@
+const { app } = require('electron');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+const fs = require('fs');
+
+// logica para el env
+let envPath;
+
+if (app.isPackaged) {
+    envPath = path.join(app.getPath('userData'), '.env');
+} else {
+    envPath = path.join(__dirname, '../../.env');
+}
+require('dotenv').config({ path: envPath });
+
+console.log(`📂 Buscando archivo .env en: ${envPath}`);
+const fileExists = fs.existsSync(envPath);
+console.log(`🧐 ¿Existe el archivo?: ${fileExists ? "SÍ" : "NO"}`);
 
 const TOKEN = process.env.NOTION_TOKEN ? process.env.NOTION_TOKEN.trim() : "";
 const TASKS_DB_ID = process.env.NOTION_DATABASE_ID ? process.env.NOTION_DATABASE_ID.trim() : "";
@@ -20,68 +35,82 @@ async function notionRequest(endpoint, method = 'GET', body = null) {
     return data;
 }
 
-// BUSCAR ID DE ASIGNATURA
-async function findSubjectId(name) {
-    if (!name || !SUBJECTS_DB_ID) return null;
+// lista asignaturas
+async function getSubjectsList() {
     try {
+        if (!TOKEN) throw new Error("No hay TOKEN. Copia el .env a la carpeta AppData.");
         const data = await notionRequest(`/databases/${SUBJECTS_DB_ID}/query`, 'POST', {
-            filter: {
-                property: "Name", 
-                title: { equals: name }
-            }
+            sorts: [{ property: 'Name', direction: 'ascending' }]
         });
-        return data.results.length > 0 ? data.results[0].id : null;
-    } catch (e) {
-        return null;
+        return data.results.map(page => ({
+            id: page.id,
+            name: page.properties['Name']?.title[0]?.plain_text || 'Sin nombre'
+        }));
+    } catch (error) {
+        console.error("Error asignaturas:", error.message);
+        return [];
     }
 }
 
-function mapTask(page) {
-    const titleProp = page.properties['Titulo'];
-    return {
-        id: page.id,
-        title: titleProp?.title[0]?.plain_text || 'Sin título',
-        subject: '',
-        completed: page.properties['Done?']?.checkbox || false
-    };
-}
-
+// leer tareas
 async function getTasks() {
     try {
+        if (!TOKEN) throw new Error("No hay TOKEN. Copia el .env a la carpeta AppData.");
+        
+        let subjectMap = {};
+        try {
+            const subjects = await getSubjectsList();
+            subjects.forEach(s => subjectMap[s.id] = s.name);
+        } catch (e) { console.warn("No se pudieron cargar asignaturas"); }
+
         const data = await notionRequest(`/databases/${TASKS_DB_ID}/query`, 'POST', {
             sorts: [{ property: 'Done?', direction: 'ascending' }]
         });
-        return data.results.map(mapTask);
+
+        return data.results.map(page => {
+            const titleProp = page.properties['Titulo'];
+            let subjectName = '';
+            const relation = page.properties['Assignments']?.relation;
+            
+            if (relation && relation.length > 0) {
+                const relationId = relation[0].id;
+                subjectName = subjectMap[relationId] || '...';
+            }
+
+            return {
+                id: page.id,
+                title: titleProp?.title[0]?.plain_text || 'Sin título',
+                subject: subjectName, 
+                completed: page.properties['Done?']?.checkbox || false
+            };
+        });
     } catch (error) {
         console.error('Error getTasks:', error.message);
         return [];
     }
 }
 
-async function addTask(title, subjectName) {
+// añadir
+async function addTask(title, subjectIdOrText) {
     try {
         const properties = {
             "Titulo": { title: [{ text: { content: title } }] },
             "Done?": { checkbox: false }
         };
 
-        // se hace el intento de buscar la asignatura aunque... weno xd
-        if (subjectName) {
-            const subjectId = await findSubjectId(subjectName);
-            if (subjectId) {
-                // si existe en Notion, la relacionamos
-                properties["Assignments"] = { relation: [{ id: subjectId }] };
-            } else {
-                // si no, la pegamos al título para no perderla
-                properties["Titulo"] = { title: [{ text: { content: `${title} (${subjectName})` } }] };
-            }
+        if (subjectIdOrText && subjectIdOrText.includes('-') && subjectIdOrText.length > 20) {
+            properties["Assignments"] = { relation: [{ id: subjectIdOrText }] };
+        } else if (subjectIdOrText) {
+                properties["Titulo"] = { 
+                    title: [{ text: { content: `${title} (${subjectIdOrText})` } }] 
+                };
         }
 
         const response = await notionRequest('/pages', 'POST', {
             parent: { database_id: TASKS_DB_ID },
             properties: properties
         });
-        return mapTask(response);
+        return { id: response.id }; 
     } catch (error) {
         console.error('Error addTask:', error.message);
         return null;
@@ -106,4 +135,4 @@ async function deleteTask(taskId) {
     } catch (error) { return false; }
 }
 
-module.exports = { getTasks, addTask, toggleTask, deleteTask };
+module.exports = { getTasks, addTask, toggleTask, deleteTask, getSubjectsList };
