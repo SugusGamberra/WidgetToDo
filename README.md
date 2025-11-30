@@ -1,24 +1,23 @@
-# Widget To-Do List
+# ✨ Widget To-Do List (Notion Sync)
 
-**Version**: 1.0.2 **Fecha**: 30/11/2025 **Autora**: SugusGamberra
+**Version**: 1.0.3 **Fecha**: 30/11/2025 **Autora**: SugusGamberra
+
 ---
+
 <p align="center">
-Un widget de escritorio sencillo para gestionar tareas de mi curso ;3
-Este widget está conectado a Notion!
+  Un widget de escritorio flotante con estética <b>Soft / Glassmorphism</b> para gestionar tus tareas del curso (o de la vida) sincronizadas en tiempo real con Notion 🌸
+  <br><br>
+  <b>Ya no necesitas tocar código! Instala, configura y disfruta ;3</b>
 </p>
+
+<p align="center">
+  <img src="./assets/widget.png" alt="Captura del Widget" width="300">
+</p>
+
 <p align="center">
   <img src="https://img.shields.io/github/license/SugusGamberra/WidgetToDo" />
   <img src="https://img.shields.io/github/stars/SugusGamberra/WidgetToDo?style=social" />
-  <img src="https://img.shields.io/github/forks/SugusGamberra/WidgetToDo?style=social" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/github/issues/SugusGamberra/WidgetToDo" />
-  <img src="https://img.shields.io/github/issues-pr/SugusGamberra/WidgetToDo" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/github/last-commit/SugusGamberra/WidgetToDo?style=flat&logo=git&logoColor=white&color=0080ff" />
+  <img src="https://img.shields.io/github/last-commit/SugusGamberra/WidgetToDo?style=flat&logo=git&logoColor=white&color=fb4268" />
 </p>
 
 <p align="center"><i>Built with the tools and technologies:</i></p>
@@ -39,76 +38,85 @@ Este widget está conectado a Notion!
 
 ## 🚀 Características
 
-- ✅ Añadir, completar y eliminar tareas
-- 📚 Categorizar por asignaturas
-- 💾 Almacenamiento CONECTADO A NOTION!!! // local (JSON) opcional
-- 🎨 Interfaz moderna y minimalista
+- ✅ **Sincronización Bidireccional:** Lo que haces aquí, sale en Notion (y viceversa).
+- 🎨 **Diseño Glassmorphism:** Fondo transparente y sombras suaves que quedan brutales con cualquier fondo!
+- 🔗 **Asignación Inteligente:** Detecta tus asignaturas de Notion automáticamente.
+- ⚙️ **Configuración Fácil:** Conectate a notion con el menú de ajustes integrado (olvídate de tocar archivos!).
+- 🩺 **Always On:** Se queda en tu escritorio y recuerda su posición.
+
+---
+
+## 📥 Instalación (Para Usuarios)
+
+1. Ve a la sección de **[Releases](../../releases)** de este repositorio (a la derecha).
+2. Descarga el archivo `.exe` de la última versión (`Widget Tareas Setup.exe`).
+3. Ejecútalo e instálalo en tu Windows.
+4. **¡Listo!** Al abrirlo, verás un icono de engranaje ⚙️ para configurarlo.
+
+---
+
+## 🐙 SETUP (Configura tu Notion)
+
+Para que el widget funcione con **TU** Notion, necesitas prepararlo una sola vez. ¡Es fácil!
+
+### 1. Consigue tu Llave (Token) 🗝️
+1. Entra en [Mis Integraciones de Notion](https://www.notion.so/profile/integrations).
+2. Dale a `+ New Integration`.
+![Configuración paso 1.2](./assets/1.2.png)
+3. Ponle un nombre (ej: "Mi Widget").
+4. Dale a **Guardar**.
+5. Copia el **"Código secreto de integracion interna"** (empieza por `secret_...`).
+![Configuración paso 1.5](./assets/1.5.png)
+
+### 2. Prepara tus Tablas en Notion 📅
+Necesitas dos bases de datos (Full Page). Si no las tienes, créalas:
+
+**A. Base de Datos de TAREAS**
+Asegúrate de que tenga EXACTAMENTE estas columnas:
+* **`Titulo`** (Tipo: `Title`/Título) -> *Es la columna principal.*
+* **`Done?`** (Tipo: `Checkbox`/Casilla) -> *Ojo con el signo de interrogación!*
+* **`Assignments`** (Tipo: `Relation`/Relación) -> *Conéctala con la tabla de Asignaturas.*
+* Si le quieres meter más cosas a la tabla como yo, cosa tuya, pero el widget no las reproducira (demomentos jiji)
+![Configuración paso 2.A](./assets/2.A.png)
+
+**B. Base de Datos de ASIGNATURAS**
+* **`Name`** (Tipo: `Title`/Título) -> *Aquí van los nombres (ej: Historia del arte, BBDD I, etc).*
+![Configuración paso 2.B](./assets/2.B.png)
+
+### 3. ¡Dales permiso! (Súper Importante) 🤝
+1. Ve a tu base de datos de **Tareas** en Notion.
+2. Arriba a la derecha: **... (tres puntos)** > **Conexiones (Connections)** > Busca tu integración y añádela.
+![Configuración paso 3.2](./assets/3.2.png)
+3. **Repite lo mismo** en la base de datos de **Asignaturas**.
+
+### 4. Conecta el Widget 🔌
+1. Abre el widget en tu escritorio.
+2. Si es la primera vez, se abrirá el menú de configuración solo.
+3. Pega tu **Token**, el ID de la base de **Tareas** y el ID de **Asignaturas**.
+   *(El ID está en la URL de Notion, es el churro de números entre la `/` y el `?`).*
+   *Ejemplo: `htttps://www.notion.so/ESTOS-NUMEROS-DE-AQUI?etc`*
+4. Guarda y a disfrutar! ✨
+
+---
 
 ## ✨ Contribuciones
 
 Las contribuciones son bienvenidas! Sigue estos pasos:
 
 1. 🍴 Forkea el repo
-2. 🌟 Crea tu branch del feature (git checkout -b feature/AmazingFeature)
-3. ✅ Commitea tus cambios (git commit -m 'Add some AmazingFeature')
-4. 📤 Pushea a la branch (git push origin feature/AmazingFeature)
+2. 🌟 Crea tu branch (`git checkout -b feature/AmazingFeature`)
+3. ✅ Commitea tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. 📤 Pushea a la branch (`git push origin feature/AmazingFeature`)
 5. 🔃 Abre una Pull Request
 
 ## 🗒️ Licencia
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE.md) file for details.
 
-### 📋 License Summary
-- ✅ Commercial use
-- ✅ Modification
-- ✅ Distribution
-- ✅ Private use
-- ❌ Liability
-- ❌ Warranty
+## 🩵 Agradecimientos
 
-## 📎 Support
-
-- 📧 **Email**: sugusgamberra@gmail.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/SugusGamberra/WidgetToDo/issues)
-
-## 🩵 Acknowledgments
-
-- 🎨 **Inspiración del diseño**: Me he inspirado en el estilo glass morphism, me ha pegado duro con eso xd
+- 🎨 **Inspiración del diseño**: Me ha pegado fuerte el estilo glassmorphism y quería algo que se sintiera parte del escritorio.
+- Hecho con mucho 💖 y estrés de estudiante de DAW.
 
 ---
-
-## 🐙 SETUP
-
-Si quieres usar este widget conectado a tu Notion tienes que seguir una serie de pasos, son un _aburrimiento_ pero muy necesarios para hacer que funcione!
-
-1. Conseguir el **TOKEN** 🗝️
-   1. Asumiendo que tienes cuenta en notion, entra aquí: [Integraciones de Notion](https://www.notion.so/profile/integrations)
-   2. Dale a `+ New Integration`
-   3. Ponle un nombre descriptivo
-   4. Dale a **submit**
-   5. Dale para ver tu token y copia esa clave secreta!
-   6. Copiala y pegala en el .env que te tienes que crear en tu proyecto, a la altura del package.json y tal, y de nombre tiene que llamarse `NOTION_TOKEN`=tutokenaqui
-2. Preparar tu **tablita en Notion** 📅
-   1. Crea una nueva página completa (full page) en notion
-   2. Asegurate que tenga **EXACTISIMAMENTE** estas columnas (importante el nombre y el tipo):
-      1. **Titulo**: Tipo `title`/Titulo. Es la _columna principal_!
-      2. **Done?**: Tipo `checkbox`/Casilla. Ten en cuenta el signo de interrogación 😘
-   3. Arriba a la derecha de tu página, dale a los 3 puntitos - `Connections (Conexiones)` y busca el nombre de la integracion que creaste en el paso 1
-3. Consigue el ID de la BBDD🆔
-   1. Abre tu pagina como pagina completa (veras un simbolito royo ventanita, tu pasale el raton x encima hasta que lo veas)
-   2. Mira la URL, date cuenta que entre la barra `/` y el `?` hay chorrocientos números, pos esos los tienes que copiar, pa que lo veas mejor:
-      https://www.notion.so/user/`NUMEROTOLARGO12345`?
-   3. Copia solo esos numeritos y pegalos en tu .env, se debe llamar `NOTION_DATABASE_ID`=tusnumeritosaqui
-
-⚠️ **IMPORTANTE**! Para que funcione el `.exe`
-Una vez instales la aplicación (`npm run dist`), tienes que copiar tu archivo .env configurado en la carpeta de datos de la aplicación:
-
-1. Pulsa Windows + R y escribe `%APPDATA%`
-2. Busca la carpeta `widget-todo`
-3. Pega ahí tu archivo **.env**
-4. **Reinicia** el widget
-
-Y **listooo**!!! Ahora puedes arrancarlo en vsc para comprobar que funcione (npm start) ;3 Mas adelante haré el .exe, así que estas instrucciones son temporales :3 
-
-> Espero qe te guste y te inspire a hacer tu propio todo list!
-> Seguiré manteniendo actualizado esto hasta que tenga una version competi jiji
+> *Espero que te guste y te inspire a hacer tu propio to-do list! Seguiré manteniendo actualizado esto hasta que tenga una versión competi jiji*

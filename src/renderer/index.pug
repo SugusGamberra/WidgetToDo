@@ -1,22 +1,42 @@
 extends components/layout
 
 block content 
-    .widget-container 
-        .glass-overlay
-        .glass-specular
-        
-        .glass-content
-            header 
-                h1 Mis Tareas
-                button#close-btn ✕
+    //- pa q no se vea fea la sombra x.x
+    .shadow-wrapper
+        //- contenedor del widget
+        .widget-container 
+            .glass-overlay
+            .glass-specular
+            
+            .glass-content
+                header 
+                    h1 Mis Tareas
+                    div(style="display: flex; gap: 10px;")
+                        button#settings-btn(style="background:transparent; border:none; cursor:pointer; font-size: 1.2rem;") ⚙️
+                        button#close-btn ✕
 
-            main 
-                .add-task-form
-                    input#new-task-title(type="text" placeholder="Nueva tarea...")
-                    input#new-task-subject(type="text" placeholder="Asignatura...")
-                    button#add-task-btn Añadir
+                main 
+                    //- panel ajustes
+                    #settings-panel(style="display: none; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 1rem; margin-bottom: 20px;")
+                        h3(style="margin-bottom: 10px; font-size: 0.9rem;") ⚙️ Configura tu Notion
+                        
+                        input#setting-key(type="password" placeholder="Notion Key" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: none;")
+                        input#setting-db-tasks(type="text" placeholder="ID Base de Datos Tareas" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: none;")
+                        input#setting-db-subjects(type="text" placeholder="ID Base de Datos Asignaturas" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 8px; border: none;")
+                        
+                        button#save-settings-btn(style="width: 100%; padding: 8px; background: #444739; color: white; border: none; border-radius: 8px; cursor: pointer;") Guardar Conexión 💾
 
-                .task-list#task-list 
-                    p.loading Cargando tareas...
+                    //- pantalla principal
+                    #main-content
+                        .add-task-form
+                            input#new-task-title(type="text" placeholder="Nueva tarea...")
+                            div(style="display: flex; gap: 10px;")
+                                select#subject-select(style="flex: 1;")
+                                    option(value="" disabled selected) Cargando...
+                                input#other-subject(type="text" placeholder="Escribe asignatura..." style="display: none; flex: 1;")
+                            button#add-task-btn Añadir
+
+                        .task-list#task-list 
+                            p.loading(style="text-align:center") Conecta tu Notion en ⚙️
     
     script(src="js/app.js")

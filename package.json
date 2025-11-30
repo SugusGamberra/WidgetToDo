@@ -1,7 +1,7 @@
 {
   "name": "widget-todo",
-  "version": "1.0.2",
-  "description": "Widget para mantener mis tareas de clases siempre a mano en el escritorio!",
+  "version": "1.0.3",
+  "description": "Widget para mantener las tareas de clases siempre a mano en el escritorio! Conectado a Notion!",
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +12,11 @@
     "appId": "com.SugusGamberra.widgettodo",
     "productName": "Widget Tareas",
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "directories": {
+      "buildResources": "build"
     },
     "files": [
       "src/**/*",
