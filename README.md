@@ -1,6 +1,6 @@
 # Widget To-Do List
 
-**Version**: 1.0.1 **Fecha**: 25/11/2025 **Autora**: SugusGamberra
+**Version**: 1.0.2 **Fecha**: 30/11/2025 **Autora**: SugusGamberra
 ---
 <p align="center">
 Un widget de escritorio sencillo para gestionar tareas de mi curso ;3
@@ -99,6 +99,14 @@ Si quieres usar este widget conectado a tu Notion tienes que seguir una serie de
    2. Mira la URL, date cuenta que entre la barra `/` y el `?` hay chorrocientos números, pos esos los tienes que copiar, pa que lo veas mejor:
       https://www.notion.so/user/`NUMEROTOLARGO12345`?
    3. Copia solo esos numeritos y pegalos en tu .env, se debe llamar `NOTION_DATABASE_ID`=tusnumeritosaqui
+
+⚠️ **IMPORTANTE**! Para que funcione el `.exe`
+Una vez instales la aplicación (`npm run dist`), tienes que copiar tu archivo .env configurado en la carpeta de datos de la aplicación:
+
+1. Pulsa Windows + R y escribe `%APPDATA%`
+2. Busca la carpeta `widget-todo`
+3. Pega ahí tu archivo **.env**
+4. **Reinicia** el widget
 
 Y **listooo**!!! Ahora puedes arrancarlo en vsc para comprobar que funcione (npm start) ;3 Mas adelante haré el .exe, así que estas instrucciones son temporales :3 
 

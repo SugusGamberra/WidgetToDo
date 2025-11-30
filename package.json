@@ -1,6 +1,6 @@
 {
   "name": "widget-todo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Widget para mantener mis tareas de clases siempre a mano en el escritorio!",
   "main": "src/main.js",
   "scripts": {
